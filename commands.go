@@ -1,11 +1,6 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 package main
 
-import (
-	"fmt"
-	"os"
-)
-
 type cliCommand struct {
 	name        string
 	description string
@@ -29,20 +24,4 @@ func getCommands() map[string]cliCommand {
 			callback:    commandHelp,
 		},
 	}
-}
-
-func commandExit(_ *config) error {
-	fmt.Print("Closing the Pokedex... Goodbye!")
-	os.Exit(0)
-	return nil
-}
-
-func commandHelp(cfg *config) error {
-	fmt.Println("Welcome to the Pokedex!")
-	fmt.Println("Usage:")
-	fmt.Println()
-	for _, c := range cfg.commands {
-		fmt.Printf("%s: %s\n", c.name, c.description)
-	}
-	return nil
 }
