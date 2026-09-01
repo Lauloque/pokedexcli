@@ -16,6 +16,11 @@ func main() {
 		input := scanner.Text()
 
 		cleanInput := cleanInput(input)
+
+		if len(cleanInput) == 0 {
+			fmt.Print("Please type a command. Type 'help' to see commands list\n")
+			continue
+		}
 		i := cleanInput[0]
 
 		command, exists := getCommands()[i]
