@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 package main
 
+import "github.com/Lauloque/pokedexcli/internal/pokecache"
+
 type cliCommand struct {
 	name        string
 	description string
@@ -11,6 +13,7 @@ type config struct {
 	commands map[string]cliCommand
 	Next     string
 	Previous string
+	Cache    *pokecache.Cache
 }
 
 func getCommands() map[string]cliCommand {

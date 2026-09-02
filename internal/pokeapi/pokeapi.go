@@ -2,13 +2,12 @@
 package pokeapi
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 )
 
-type areaList struct {
+type AreaList struct {
 	Count    int     `json:"count"`
 	Next     string  `json:"next"`
 	Previous *string `json:"previous"`
@@ -18,11 +17,12 @@ type areaList struct {
 	} `json:"results"`
 }
 
-func PrintAreaList(url string) (nextUrl string, previousUrl *string, err error) {
+func GetAreaListData(url string) ([]byte, error) {
+
 	res, err := http.Get(url)
 	if err != nil {
 		fmt.Println("Couldn't get location-area:")
-		return "", nil, err
+		return nil, err
 	}
 	defer res.Body.Close()
 
@@ -32,19 +32,8 @@ func PrintAreaList(url string) (nextUrl string, previousUrl *string, err error) 
 	}
 	if err != nil {
 		fmt.Println("Couldn't read response body:")
-		return "", nil, err
+		return nil, err
 	}
 
-	areaList := areaList{}
-	err = json.Unmarshal(body, &areaList)
-	if err != nil {
-		fmt.Println("Couldn't unmarshal JSON data")
-		return "", nil, err
-	}
-
-	for _, area := range areaList.Areas {
-		fmt.Println(area.Name)
-	}
-
-	return areaList.Next, areaList.Previous, nil
+	return body, nil
 }

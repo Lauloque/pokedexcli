@@ -15,14 +15,41 @@ func derefOrEmpty(s *string) string {
 	return *s
 }
 
+func printAreaList(areaList pokeapi.AreaList) {
+	for _, area := range areaList.Areas {
+		fmt.Println(area.Name)
+	}
+}
+
+func getAreaList(cfg *config, url string) (pokeapi.AreaList, error) {
+	areaList := pokeapi.AreaList{}
+	var data []byte
+	var ok bool
+	if data, ok = cfg.Cache.Get(url); !ok {
+		var err error
+		data, err = pokeapi.GetAreaListData(url)
+		if err != nil {
+			return areaList, err
+		}
+		cfg.Cache.Add(url, data)
+	}
+	err := json.Unmarshal(data, &areaList)
+	if err != nil {
+		return areaList, err
+	}
+	return areaList, nil
+}
+
 func commandMap(cfg *config) error {
-	nextUrl, previousUrl, err := pokeapi.PrintAreaList(cfg.Next)
+	areaList, err := getAreaList(cfg, cfg.Next)
 	if err != nil {
 		return err
 	}
 
-	cfg.Previous = derefOrEmpty(previousUrl)
-	cfg.Next = nextUrl
+	printAreaList(areaList)
+
+	cfg.Previous = derefOrEmpty(areaList.Previous)
+	cfg.Next = areaList.Next
 
 	return nil
 }
@@ -33,13 +60,15 @@ func commandMapBack(cfg *config) error {
 		return nil
 	}
 
-	nextUrl, previousUrl, err := pokeapi.PrintAreaList(cfg.Previous)
+	areaList, err := getAreaList(cfg, cfg.Previous)
 	if err != nil {
 		return err
 	}
 
-	cfg.Next = nextUrl
-	cfg.Previous = derefOrEmpty(previousUrl)
+	printAreaList(areaList)
+
+	cfg.Next = areaList.Next
+	cfg.Previous = derefOrEmpty(areaList.Previous)
 
 	return nil
 }
