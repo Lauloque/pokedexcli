@@ -17,6 +17,17 @@ type AreaList struct {
 	} `json:"results"`
 }
 
+type AreaInfo struct {
+	ID                int    `json:"id"`
+	Name              string `json:"name"`
+	PokemonEncounters []struct {
+		Pokemon struct {
+			Name string `json:"name"`
+			URL  string `json:"url"`
+		} `json:"pokemon"`
+	} `json:"pokemon_encounters"`
+}
+
 func GetPokeapiData(url string) ([]byte, error) {
 
 	res, err := http.Get(url)
