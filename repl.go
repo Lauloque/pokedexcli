@@ -32,7 +32,10 @@ func startRepl(cfg *config) {
 			continue
 		}
 		inputCmd := cleanInput[0]
-		arg := cleanInput[1]
+		arg := ""
+		if len(cleanInput) > 1 {
+			arg = cleanInput[1]
+		}
 
 		command, exists := cfg.commands[inputCmd]
 		if exists {
