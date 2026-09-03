@@ -39,11 +39,10 @@ func GetPokeapiData(url string) ([]byte, error) {
 
 	body, err := io.ReadAll(res.Body)
 	if res.StatusCode > 299 {
-		fmt.Printf("Response failed with status code %d:\n%s\n", res.StatusCode, body)
+		return nil, fmt.Errorf("Response failed with status code %d:\n%s", res.StatusCode, body)
 	}
 	if err != nil {
-		fmt.Println("Couldn't read response body:")
-		return nil, err
+		return nil, fmt.Errorf("Couldn't read response body: %w", err)
 	}
 
 	return body, nil
