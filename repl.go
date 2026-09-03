@@ -31,17 +31,18 @@ func startRepl(cfg *config) {
 			fmt.Print("Please type a command. Type 'help' to see commands list\n")
 			continue
 		}
-		i := cleanInput[0]
+		inputCmd := cleanInput[0]
+		arg := cleanInput[1]
 
-		command, exists := cfg.commands[i]
+		command, exists := cfg.commands[inputCmd]
 		if exists {
-			err := command.callback(cfg)
+			err := command.callback(cfg, arg)
 			if err != nil {
 				fmt.Println(err)
 			}
 			continue
 		} else {
-			fmt.Printf("Unknown Command: '%s'\n", i)
+			fmt.Printf("Unknown Command: '%s'\n", inputCmd)
 			continue
 		}
 	}

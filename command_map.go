@@ -40,7 +40,7 @@ func getAreaList(cfg *config, url string) (pokeapi.AreaList, error) {
 	return areaList, nil
 }
 
-func commandMap(cfg *config) error {
+func commandMap(cfg *config, _ string) error {
 	areaList, err := getAreaList(cfg, cfg.Next)
 	if err != nil {
 		return err
@@ -54,7 +54,7 @@ func commandMap(cfg *config) error {
 	return nil
 }
 
-func commandMapBack(cfg *config) error {
+func commandMapBack(cfg *config, _ string) error {
 	if cfg.Previous == "" {
 		fmt.Println("you're on the first page")
 		return nil
