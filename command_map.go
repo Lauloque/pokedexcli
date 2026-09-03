@@ -27,7 +27,7 @@ func getAreaList(cfg *config, url string) (pokeapi.AreaList, error) {
 	var ok bool
 	if data, ok = cfg.Cache.Get(url); !ok {
 		var err error
-		data, err = pokeapi.GetAreaListData(url)
+		data, err = pokeapi.GetPokeapiData(url)
 		if err != nil {
 			return areaList, err
 		}

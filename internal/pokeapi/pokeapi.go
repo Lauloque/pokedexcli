@@ -17,7 +17,7 @@ type AreaList struct {
 	} `json:"results"`
 }
 
-func GetAreaListData(url string) ([]byte, error) {
+func GetPokeapiData(url string) ([]byte, error) {
 
 	res, err := http.Get(url)
 	if err != nil {
