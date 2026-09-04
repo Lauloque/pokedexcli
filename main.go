@@ -4,6 +4,7 @@ package main
 import (
 	"time"
 
+	"github.com/Lauloque/pokedexcli/internal/pokeapi"
 	"github.com/Lauloque/pokedexcli/internal/pokecache"
 )
 
@@ -16,6 +17,7 @@ func main() {
 		Previous: "",
 		Next:     "https://pokeapi.co/api/v2/location-area/?offset=0&limit=20",
 		Cache:    cache,
+		Pokedex:  map[string]pokeapi.Pokemon{},
 	}
 
 	startRepl(cfg)
