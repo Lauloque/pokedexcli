@@ -43,7 +43,6 @@ func tryCatch(cfg *config, pkmn pokeapi.Pokemon) {
 	// https://pwo-wiki.info/index.php/Arceus
 	// https://pwo-wiki.info/index.php/Base_Experience
 	attempt := rand.IntN(360)
-	fmt.Printf("%s catch rate is %d, attempting %d...\n", pkmn.Name, pkmn.CatchRate, attempt)
 	if attempt >= pkmn.CatchRate {
 		fmt.Println(pkmn.Name, "was caught!")
 		addPkmn2Pokedex(cfg, pkmn)
