@@ -7,27 +7,6 @@ import (
 	"net/http"
 )
 
-type AreaList struct {
-	Count    int     `json:"count"`
-	Next     string  `json:"next"`
-	Previous *string `json:"previous"`
-	Areas    []struct {
-		Name string `json:"name"`
-		URL  string `json:"url"`
-	} `json:"results"`
-}
-
-type AreaInfo struct {
-	ID                int    `json:"id"`
-	Name              string `json:"name"`
-	PokemonEncounters []struct {
-		Pokemon struct {
-			Name string `json:"name"`
-			URL  string `json:"url"`
-		} `json:"pokemon"`
-	} `json:"pokemon_encounters"`
-}
-
 func GetPokeapiData(url string) ([]byte, error) {
 
 	res, err := http.Get(url)
