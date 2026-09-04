@@ -8,7 +8,11 @@ Made in the context of the [Boot.dev class: Build a Pokedex in Go](https://www.b
 
 Run `./pokedexcli` from a terminal to start the command pokedex cli, then use any of these commands:
 
-`help`: Displays a help message
 `map`: Displays the names of the next 20 location areas in the Pokemon world
 `mapb`: Displays the names of the previous 20 location areas in the Pokemon world
+`explore`: Displays the names of the pokemons found in a given area. e.g. `explore analave-city-area`
+`catch`: Tries to catch a given Pokemon e.g. `catch pikachu`
+`inspect`: Inspect your Pokedex entry for a given Pokemon e.g. `inspect pikachu`
+`pokedex`: Lists the pokemons registered in your Pokedex
 `exit`: Exit the Pokedex
+`help`: Displays a help message
