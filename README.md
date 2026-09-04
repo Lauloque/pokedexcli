@@ -4,6 +4,9 @@ This is a command-line Pokexed with a REPL, API calls, JSON parsing, and caching
 
 Made in the context of the [Boot.dev class: Build a Pokedex in Go](https://www.boot.dev/courses/build-pokedex-cli-golang)
 
+<img width="900" height="550" alt="image" src="https://github.com/user-attachments/assets/b7eb75bf-1f2d-47d9-bd83-88d5278a35c1" />
+
+
 ## Usage:
 
 Run `./pokedexcli` from a terminal to start the command pokedex cli, then use any of these commands:
