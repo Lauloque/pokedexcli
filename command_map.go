@@ -25,6 +25,8 @@ func getAreaList(cfg *config, url string) (pokeapi.AreaList, error) {
 	areaList := pokeapi.AreaList{}
 	var data []byte
 	var ok bool
+
+	// check if data is in cache, or cache it
 	if data, ok = cfg.Cache.Get(url); !ok {
 		var err error
 		data, err = pokeapi.GetPokeapiData(url)
@@ -33,6 +35,7 @@ func getAreaList(cfg *config, url string) (pokeapi.AreaList, error) {
 		}
 		cfg.Cache.Add(url, data)
 	}
+
 	err := json.Unmarshal(data, &areaList)
 	if err != nil {
 		return areaList, err
